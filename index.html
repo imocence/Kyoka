@@ -1,0 +1,551 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>镜花 - compare</title>
+    <link rel="shortcut icon" type="image/x-icon" href="favicon.ico">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <meta name="description" content="Validate, format, compare JSON. Beyond Compare documents.">
+    <link type="text/css" href="/css/bootstrap.min.css" rel="stylesheet">
+    <link type="text/css" href="/css/kyoka.css" rel="stylesheet">
+    <script type="text/javascript" src="/js/bootstrap.js"></script>
+    <script type="text/javascript" src="/js/bootstrap.bundle.js"></script>
+    <script type="text/javascript" src="/js/translate.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            translate.selectLanguageTag.show = true;
+            translate.service.use('client.edge');
+            translate.execute();
+        });
+    </script>
+</head>
+<body>
+<!-- 导航栏 -->
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <div class="container">
+        <a class="navbar-brand" href="#">
+            <img src="/img/logo.png" class="logo" style="height: 40px;"/>
+            <i class="fas fa-code-compare me-2"></i>镜花
+        </a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav ms-auto">
+                <li class="nav-item">
+                    <a class="nav-link active" href="#"><i class="fas fa-home me-1"></i> 首页</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#"><i class="fas fa-book me-1"></i> 文档</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#"><i class="fas fa-envelope me-1"></i> 联系</a>
+                </li>
+                <li class="nav-item">
+                    <div id="translate"></div>
+                </li>
+            </ul>
+        </div>
+    </div>
+</nav>
+
+<!-- 头部介绍 -->
+<div class="hero">
+    <div class="container text-center">
+        <h1 class="display-4 fw-bold">JSON/文本比对工具</h1>
+        <p class="lead">快速比较两个JSON文档或文本内容，高亮显示差异部分</p>
+    </div>
+</div>
+
+<!-- 顶部横幅广告 -->
+<div class="container mb-4">
+    <div class="ad-container">
+        <div class="ad-header">
+            <span class="ad-label">特别推荐</span>
+            <i class="fas fa-ad"></i>
+        </div>
+        <div class="ad-content">
+            <div class="row align-items-center">
+                <div class="col-md-8">
+                    <div class="ad-title">高级JSON工具包 - 限时优惠</div>
+                    <div class="ad-description">包含JSON格式化、验证、压缩和比对等全套功能，现在购买可享受7折优惠</div>
+                </div>
+                <div class="col-md-4 text-center">
+                    <a href="#" class="btn btn-primary">立即购买</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- 主内容区 -->
+<div class="container mb-5">
+    <div class="row">
+        <!-- 左侧广告边栏 -->
+        <div class="col-lg-2 ad-sidebar">
+            <div class="ad-container">
+                <div class="ad-header">
+                    <span class="ad-label">广告</span>
+                    <i class="fas fa-info-circle"></i>
+                </div>
+                <div class="ad-content">
+                    <div class="ad-title">JSON格式化工具</div>
+                    <div class="ad-description">在线JSON格式化、验证和压缩工具</div>
+                    <a href="#" class="ad-cta">立即使用</a>
+                    <div class="ad-sponsor">由 镜花 提供</div>
+                </div>
+            </div>
+
+            <div class="ad-container">
+                <div class="ad-header">
+                    <span class="ad-label">推荐</span>
+                    <i class="fas fa-star"></i>
+                </div>
+                <div class="ad-content">
+                    <div class="ad-title">前端开发课程</div>
+                    <div class="ad-description">学习现代前端开发技术</div>
+                    <a href="#" class="ad-cta">查看详情</a>
+                    <div class="ad-sponsor">赞助内容</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 主内容 -->
+        <div class="col-lg-8 main-content">
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="editor-container">
+                        <div class="editor-header d-flex justify-content-between align-items-center">
+                            <span>原文 / JSON 1</span>
+                            <span class="mode-badge">文本模式</span>
+                        </div>
+                        <div class="editor-body">
+                            <textarea id="leftInput" placeholder="请输入原文或第一个JSON内容...">{
+  "name": "张三",
+  "age": 30,
+  "city": "北京",
+  "hobbies": ["阅读", "游泳", "摄影"]
+}</textarea>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="editor-container">
+                        <div class="editor-header d-flex justify-content-between align-items-center">
+                            <span>修改后 / JSON 2</span>
+                            <span class="mode-badge">文本模式</span>
+                        </div>
+                        <div class="editor-body">
+                            <textarea id="rightInput" placeholder="请输入修改后的文本或第二个JSON内容...">{
+  "name": "张三",
+  "age": 31,
+  "city": "上海",
+  "hobbies": ["阅读", "旅游", "音乐"],
+  "married": false
+}</textarea>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 控制按钮 -->
+            <div class="row my-4">
+                <div class="col-12 text-center">
+                    <button id="compareBtn" class="btn btn-primary btn-lg"><i class="fas fa-code-compare me-2"></i> 比较内容</button>
+                    <button id="clearBtn" class="btn btn-outline-primary btn-lg ms-2"><i class="fas fa-broom me-2"></i> 清空内容</button>
+                    <div class="mt-3">
+                        <div class="btn-group" role="group">
+                            <button type="button" class="btn btn-outline-secondary option-btn active" data-mode="text">
+                                <i class="fas fa-font me-1"></i> 文本模式
+                            </button>
+                            <button type="button" class="btn btn-outline-secondary option-btn" data-mode="json">
+                                <i class="fas fa-code me-1"></i> JSON模式
+                            </button>
+                        </div>
+                        <div class="btn-group" role="group">
+                            <button type="button" class="btn btn-outline-secondary option-btn" data-option="swap">
+                                <i class="fas fa-exchange-alt me-1"></i> 交换内容
+                            </button>
+                            <button type="button" class="btn btn-outline-secondary option-btn" data-option="sample">
+                                <i class="fas fa-vial me-1"></i> 示例数据
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 差异显示 -->
+            <div class="diff-container">
+                <div class="diff-header">
+                    <i class="fas fa-circle-info me-2"></i> 比较结果
+                </div>
+                <div class="diff-body" id="diffOutput">
+                    <p class="text-center text-muted m-0">比较结果将显示在这里...</p>
+                </div>
+            </div>
+
+            <!-- 使用说明 -->
+            <div class="row mt-5">
+                <div class="col-lg-6">
+                    <div class="card">
+                        <div class="card-header bg-dark text-white">
+                            <i class="fas fa-lightbulb me-2"></i> 使用说明
+                        </div>
+                        <div class="card-body">
+                            <ol class="mb-0">
+                                <li>在左右两侧输入框中分别输入要比较的内容</li>
+                                <li>选择文本模式或JSON模式（JSON模式会自动格式化）</li>
+                                <li>点击"比较内容"按钮查看差异</li>
+                                <li>使用"交换内容"按钮可以快速交换左右两侧内容</li>
+                            </ol>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-6">
+                    <div class="card">
+                        <div class="card-header bg-dark text-white">
+                            <i class="fas fa-cogs me-2"></i> 功能特点
+                        </div>
+                        <div class="card-body">
+                            <ul class="mb-0">
+                                <li>高亮显示文本差异</li>
+                                <li>支持JSON格式化与验证</li>
+                                <li>响应式设计，支持移动设备</li>
+                                <li>简洁直观的用户界面</li>
+                                <li>完全在浏览器中运行，无需服务器</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 右侧广告边栏 -->
+        <div class="col-lg-2 ad-sidebar">
+            <div class="ad-container">
+                <div class="ad-header">
+                    <span class="ad-label">推广</span>
+                    <i class="fas fa-bullhorn"></i>
+                </div>
+                <div class="ad-content">
+                    <div class="ad-title">开发者工具包</div>
+                    <div class="ad-description">一站式开发工具集合</div>
+                    <a href="#" class="ad-cta">了解更多</a>
+                    <div class="ad-sponsor">赞助内容</div>
+                </div>
+            </div>
+
+            <div class="ad-container">
+                <div class="ad-header">
+                    <span class="ad-label">广告</span>
+                    <i class="fas fa-info-circle"></i>
+                </div>
+                <div class="ad-content">
+                    <div class="ad-title">API调试工具</div>
+                    <div class="ad-description">快速测试和调试API接口</div>
+                    <a href="#" class="ad-cta">免费使用</a>
+                    <div class="ad-sponsor">由 镜花 提供</div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- 底部广告 -->
+<div class="container mb-5">
+    <div class="ad-container">
+        <div class="ad-header">
+            <span class="ad-label">合作伙伴</span>
+            <i class="fas fa-handshake"></i>
+        </div>
+        <div class="ad-content">
+            <div class="row">
+                <div class="col-md-8">
+                    <div class="ad-title">寻找更多开发工具？</div>
+                    <div class="ad-description">访问我们的合作伙伴网站，获取更多实用的开发工具和资源</div>
+                </div>
+                <div class="col-md-4 text-center">
+                    <a href="#" class="btn btn-outline-primary">探索更多</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- 页脚 -->
+<footer class="footer text-center">
+    <div class="container">
+        <p class="mb-1">镜花 - JSON/文本比对工具</p>
+        <p class="mb-0">imcoence © 2025 版权所有 | 基于 Bootstrap 和 JavaScript 实现</p>
+    </div>
+</footer>
+<!-- 翻译JS -->
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        // 初始化翻译功能
+        if (typeof translate !== 'undefined') {
+            translate.selectLanguageTag.show = true;
+            translate.service.use('client.edge');
+            translate.execute();
+        } else {
+            console.warn('Translate.js not loaded');
+        }
+
+        // 获取DOM元素
+        const leftInput = document.getElementById('leftInput');
+        const rightInput = document.getElementById('rightInput');
+        const compareBtn = document.getElementById('compareBtn');
+        const clearBtn = document.getElementById('clearBtn');
+        const diffOutput = document.getElementById('diffOutput');
+        const modeButtons = document.querySelectorAll('[data-mode]');
+        const optionButtons = document.querySelectorAll('[data-option]');
+
+        let currentMode = 'text';
+
+        // 模式切换
+        modeButtons.forEach(button => {
+            button.addEventListener('click', function () {
+                const mode = this.getAttribute('data-mode');
+                currentMode = mode;
+
+                // 更新按钮状态
+                modeButtons.forEach(btn => btn.classList.remove('active'));
+                this.classList.add('active');
+
+                // 更新模式标签
+                document.querySelectorAll('.mode-badge').forEach(badge => {
+                    badge.textContent = mode === 'text' ? '文本模式' : 'JSON模式';
+                });
+
+                // 如果当前是JSON模式，尝试格式化内容
+                if (mode === 'json') {
+                    formatJsonTextarea(leftInput);
+                    formatJsonTextarea(rightInput);
+                }
+            });
+        });
+
+        // 选项按钮处理
+        optionButtons.forEach(button => {
+            button.addEventListener('click', function () {
+                const option = this.getAttribute('data-option');
+
+                if (option === 'swap') {
+                    // 交换内容
+                    const temp = leftInput.value;
+                    leftInput.value = rightInput.value;
+                    rightInput.value = temp;
+
+                    // 如果当前是JSON模式，重新格式化
+                    if (currentMode === 'json') {
+                        formatJsonTextarea(leftInput);
+                        formatJsonTextarea(rightInput);
+                    }
+                } else if (option === 'sample') {
+                    // 加载示例数据
+                    leftInput.value = `{
+  "name": "张三",
+  "age": 30,
+  "city": "北京",
+  "hobbies": ["阅读", "游泳", "摄影"]
+}`;
+                    rightInput.value = `{
+  "name": "张三",
+  "age": 31,
+  "city": "上海",
+  "hobbies": ["阅读", "旅游", "音乐"],
+  "married": false
+}`;
+
+                    // 如果当前是JSON模式，格式化
+                    if (currentMode === 'json') {
+                        formatJsonTextarea(leftInput);
+                        formatJsonTextarea(rightInput);
+                    }
+                }
+            });
+        });
+
+        // 比较按钮事件
+        compareBtn.addEventListener('click', function () {
+            const leftValue = leftInput.value;
+            const rightValue = rightInput.value;
+
+            if (!leftValue.trim() || !rightValue.trim()) {
+                diffOutput.innerHTML = '<p class="text-danger text-center">请输入要比较的内容</p>';
+                return;
+            }
+
+            if (currentMode === 'json') {
+                try {
+                    // 验证并格式化JSON
+                    const leftJson = JSON.parse(leftValue);
+                    const rightJson = JSON.parse(rightValue);
+
+                    // 转换为格式化的字符串进行比较
+                    const leftFormatted = JSON.stringify(leftJson, null, 2);
+                    const rightFormatted = JSON.stringify(rightJson, null, 2);
+
+                    // 执行差异比较
+                    const diff = diffText(leftFormatted, rightFormatted);
+                    displayDiff(diff);
+                } catch (e) {
+                    diffOutput.innerHTML = `<p class="text-danger text-center">JSON格式错误: ${e.message}</p>`;
+                }
+            } else {
+                // 文本模式比较
+                const diff = diffText(leftValue, rightValue);
+                displayDiff(diff);
+            }
+        });
+
+        // 清空按钮事件
+        clearBtn.addEventListener('click', function () {
+            leftInput.value = '';
+            rightInput.value = '';
+            diffOutput.innerHTML = '<p class="text-center text-muted m-0">比较结果将显示在这里...</p>';
+        });
+
+        // 格式化JSON文本区域
+        function formatJsonTextarea(textarea) {
+            try {
+                const json = JSON.parse(textarea.value);
+                textarea.value = JSON.stringify(json, null, 2);
+            } catch (e) {
+                // 如果不是有效的JSON，保持原样
+            }
+        }
+
+        // 文本差异比较函数
+        function diffText(text1, text2) {
+            const lines1 = text1.split('\n');
+            const lines2 = text2.split('\n');
+            const diff = [];
+
+            const maxLines = Math.max(lines1.length, lines2.length);
+
+            for (let i = 0; i < maxLines; i++) {
+                const line1 = lines1[i] || '';
+                const line2 = lines2[i] || '';
+
+                if (line1 !== line2) {
+                    // 查找具体差异
+                    let start = 0;
+                    let end = Math.max(line1.length, line2.length);
+
+                    // 找出开始不同的位置
+                    while (start < end && line1.charAt(start) === line2.charAt(start)) {
+                        start++;
+                    }
+
+                    // 找出结束不同的位置
+                    let pos1 = line1.length;
+                    let pos2 = line2.length;
+                    while (pos1 > start && pos2 > start && line1.charAt(pos1 - 1) === line2.charAt(pos2 - 1)) {
+                        pos1--;
+                        pos2--;
+                    }
+
+                    diff.push({
+                        line: i + 1,
+                        left: line1,
+                        right: line2,
+                        type: 'diff',
+                        diffStart: start,
+                        diffEnd1: pos1,
+                        diffEnd2: pos2
+                    });
+                } else {
+                    diff.push({
+                        line: i + 1,
+                        text: line1,
+                        type: 'same'
+                    });
+                }
+            }
+
+            return diff;
+        }
+
+        // 显示差异结果
+        function displayDiff(diff) {
+            if (diff.length === 0) {
+                diffOutput.innerHTML = '<p class="text-center text-success">内容完全相同</p>';
+                return;
+            }
+
+            let html = '<table class="diff-table">';
+
+            diff.forEach(item => {
+                if (item.type === 'same') {
+                    html += `
+                        <tr class="line-unchanged">
+                            <td class="diff-indicator unchanged"></td>
+                            <td class="line-number">${item.line}</td>
+                            <td class="line-content">${escapeHtml(item.text)}</td>
+                        </tr>`;
+                } else {
+                    // 显示左侧删除的内容
+                    html += `
+                        <tr class="line-removed">
+                            <td class="diff-indicator removed"></td>
+                            <td class="line-number">${item.line}</td>
+                            <td class="line-content">`;
+
+                    if (item.diffStart > 0) {
+                        html += escapeHtml(item.left.substring(0, item.diffStart));
+                    }
+
+                    if (item.diffStart < item.diffEnd1) {
+                        html += `<span class="removed">${escapeHtml(item.left.substring(item.diffStart, item.diffEnd1))}</span>`;
+                    }
+
+                    if (item.diffEnd1 < item.left.length) {
+                        html += escapeHtml(item.left.substring(item.diffEnd1));
+                    }
+
+                    html += `</td>
+                        </tr>`;
+
+                    // 显示右侧添加的内容
+                    html += `
+                        <tr class="line-added">
+                            <td class="diff-indicator added"></td>
+                            <td class="line-number">${item.line}</td>
+                            <td class="line-content">`;
+
+                    if (item.diffStart > 0) {
+                        html += escapeHtml(item.right.substring(0, item.diffStart));
+                    }
+
+                    if (item.diffStart < item.diffEnd2) {
+                        html += `<span class="added">${escapeHtml(item.right.substring(item.diffStart, item.diffEnd2))}</span>`;
+                    }
+
+                    if (item.diffEnd2 < item.right.length) {
+                        html += escapeHtml(item.right.substring(item.diffEnd2));
+                    }
+
+                    html += `</td>
+                        </tr>`;
+                }
+            });
+
+            html += '</table>';
+            diffOutput.innerHTML = html;
+        }
+
+        // HTML转义函数
+        function escapeHtml(text) {
+            return text
+                .replace(/&/g, '&amp;')
+                .replace(/</g, '&lt;')
+                .replace(/>/g, '&gt;')
+                .replace(/"/g, '&quot;')
+                .replace(/'/g, '&#039;');
+        }
+    });
+</script>
+</body>
+</html>

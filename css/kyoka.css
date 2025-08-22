@@ -1,0 +1,300 @@
+body {
+    background-color: #f8f9fa;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+.navbar-brand {
+    font-weight: 700;
+    color: #6f42c1;
+}
+.editor-container {
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    margin-bottom: 20px;
+    background: white;
+}
+.editor-header {
+    background: #6f42c1;
+    color: white;
+    padding: 10px 15px;
+    font-weight: 600;
+}
+.editor-body {
+    height: 400px;
+    padding: 0;
+}
+textarea {
+    width: 100%;
+    height: 100%;
+    border: none;
+    padding: 15px;
+    font-family: 'Consolas', 'Monaco', monospace;
+    resize: none;
+    outline: none;
+}
+.diff-container {
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    background: white;
+    margin-bottom: 20px;
+}
+.diff-header {
+    background: #6f42c1;
+    color: white;
+    padding: 10px 15px;
+    font-weight: 600;
+}
+.diff-body {
+    padding: 15px;
+    min-height: 200px;
+    max-height: 400px;
+    overflow-y: auto;
+    font-family: 'Consolas', 'Monaco', monospace;
+    white-space: pre-wrap;
+}
+.btn-primary {
+    background-color: #6f42c1;
+    border-color: #6f42c1;
+}
+.btn-primary:hover {
+    background-color: #5a32a3;
+    border-color: #5a32a3;
+}
+.btn-outline-primary {
+    color: #6f42c1;
+    border-color: #6f42c1;
+}
+.btn-outline-primary:hover {
+    background-color: #6f42c1;
+    color: white;
+}
+.added {
+    background-color: #d4edda;
+    color: #155724;
+    padding: 2px 4px;
+    border-radius: 3px;
+}
+.removed {
+    background-color: #f8d7da;
+    color: #721c24;
+    padding: 2px 4px;
+    border-radius: 3px;
+}
+.footer {
+    background-color: #343a40;
+    color: white;
+    padding: 20px 0;
+    margin-top: 40px;
+}
+.option-btn {
+    margin: 0 5px 10px 0;
+}
+.mode-badge {
+    background: #e9ecef;
+    color: #495057;
+    padding: 5px 10px;
+    border-radius: 4px;
+    font-size: 0.85rem;
+    margin-left: 10px;
+}
+.hero {
+    background: linear-gradient(135deg, #6f42c1 0%, #6610f2 100%);
+    color: white;
+    padding: 40px 0;
+    margin-bottom: 30px;
+}
+.diff-line {
+    display: flex;
+    margin-bottom: 4px;
+    font-family: 'Consolas', 'Monaco', monospace;
+    font-size: 14px;
+    line-height: 1.5;
+}
+.line-number {
+    width: 40px;
+    text-align: right;
+    padding-right: 10px;
+    color: #6c757d;
+    user-select: none;
+}
+.line-content {
+    flex: 1;
+    padding-left: 10px;
+    border-left: 1px solid #e9ecef;
+}
+.diff-table {
+    width: 100%;
+    border-collapse: collapse;
+}
+.diff-table td {
+    padding: 4px 8px;
+    vertical-align: top;
+}
+.line-added {
+    background-color: #f8fff8;
+}
+.line-removed {
+    background-color: #fff8f8;
+}
+.line-unchanged {
+    background-color: #fff;
+}
+.diff-indicator {
+    width: 30px;
+    text-align: center;
+    user-select: none;
+}
+.diff-indicator.added:before {
+    content: '+';
+    color: #28a745;
+    font-weight: bold;
+}
+.diff-indicator.removed:before {
+    content: '-';
+    color: #dc3545;
+    font-weight: bold;
+}
+.diff-indicator.unchanged:before {
+    content: ' ';
+}
+/* 广告位样式 */
+.ad-container {
+    border-radius: 8px;
+    overflow: hidden;
+    margin-bottom: 20px;
+    background: white;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+    border: 1px solid #eaeaea;
+}
+.ad-header {
+    background: #f8f9fa;
+    color: #6c757d;
+    padding: 8px 12px;
+    font-size: 0.8rem;
+    border-bottom: 1px solid #eaeaea;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.ad-label {
+    font-weight: 600;
+    text-transform: uppercase;
+    font-size: 0.7rem;
+}
+.ad-content {
+    padding: 15px;
+    text-align: center;
+    min-height: 120px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+.ad-title {
+    font-weight: 600;
+    margin-bottom: 8px;
+    color: #2c3e50;
+}
+.ad-description {
+    font-size: 0.9rem;
+    color: #6c757d;
+    margin-bottom: 12px;
+}
+.ad-cta {
+    background: #6f42c1;
+    color: white;
+    padding: 6px 12px;
+    border-radius: 4px;
+    text-decoration: none;
+    font-size: 0.85rem;
+    transition: background 0.2s;
+}
+.ad-cta:hover {
+    background: #5a32a3;
+    color: white;
+}
+.ad-image {
+    max-width: 100%;
+    margin-bottom: 10px;
+    border-radius: 4px;
+}
+.ad-sponsor {
+    font-size: 0.75rem;
+    color: #adb5bd;
+    margin-top: 8px;
+}
+.ad-row {
+    margin-bottom: 20px;
+}
+.main-content {
+    position: relative;
+}
+.ad-sidebar {
+    position: sticky;
+    top: 20px;
+}
+@media (max-width: 992px) {
+    .ad-sidebar {
+        display: none;
+    }
+}
+/* 翻译选择器样式优化 */
+#translate {
+    position: absolute;
+    top: 20px;
+    z-index: 1000;
+}
+.translateSelectLanguage {
+    width: 120px;
+    padding: 2px 12px;
+    border-radius: 20px;
+    font-size: 14px;
+    transition: all 0.3s;
+    background-color: rgba(255, 255, 255, 0.2);
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    color: white;
+    cursor: pointer;
+    appearance: none;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' fill='white' viewBox='0 0 16 16'%3E%3Cpath d='M8 0a8 8 0 1 0 0 16A8 8 0 0 0 8 0zM7 10.5a.5.5 0 0 1-1 0V5.5a.5.5 0 0 1 1 0v5zm2-3a.5.5 0 0 1-1 0v-2a.5.5 0 0 1 1 0v2zm2 3a.5.5 0 0 1-1 0V5.5a.5.5 0 0 1 1 0v5z'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: right 12px center;
+    background-size: 12px 12px;
+    padding-right: 35px;
+}
+.translateSelectLanguage:hover {
+    background-color: rgba(255, 255, 255, 0.3);
+    border-color: rgba(255, 255, 255, 0.5);
+}
+.translateSelectLanguage:focus {
+    border-color: rgba(255, 255, 255, 0.8);
+    box-shadow: 0 0 0 0.2rem rgba(255, 255, 255, 0.25);
+    outline: 0;
+    background-color: rgba(255, 255, 255, 0.3);
+}
+.translateSelectLanguage option {
+    background: #2c3e50;
+    color: white;
+}
+/* 导航栏中的翻译选择器 */
+.navbar-translate {
+    margin-right: 15px;
+}
+.navbar-translate .translateSelectLanguage {
+    background-color: rgba(255, 255, 255, 0.1);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    margin-top: 5px;
+}
+/* 页脚中的翻译选择器 */
+.footer-translate {
+    margin-top: 15px;
+}
+.footer-translate .translateSelectLanguage {
+    background-color: rgba(255, 255, 255, 0.1);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    color: white;
+}
+.footer-translate .translateSelectLanguage option {
+    background: #343a40;
+    color: white;
+}
