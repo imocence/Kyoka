@@ -159,7 +159,7 @@ textarea {
     content: ' ';
 }
 /* 广告位样式 */
-.ad-container {
+.gg-container {
     border-radius: 8px;
     overflow: hidden;
     margin-bottom: 20px;
@@ -167,7 +167,7 @@ textarea {
     box-shadow: 0 2px 4px rgba(0,0,0,0.05);
     border: 1px solid #eaeaea;
 }
-.ad-header {
+.gg-header {
     background: #f8f9fa;
     color: #6c757d;
     padding: 8px 12px;
@@ -177,12 +177,12 @@ textarea {
     justify-content: space-between;
     align-items: center;
 }
-.ad-label {
+.gg-label {
     font-weight: 600;
     text-transform: uppercase;
     font-size: 0.7rem;
 }
-.ad-content {
+.gg-content {
     padding: 15px;
     text-align: center;
     min-height: 120px;
@@ -191,17 +191,17 @@ textarea {
     justify-content: center;
     align-items: center;
 }
-.ad-title {
+.gg-title {
     font-weight: 600;
     margin-bottom: 8px;
     color: #2c3e50;
 }
-.ad-description {
+.gg-description {
     font-size: 0.9rem;
     color: #6c757d;
     margin-bottom: 12px;
 }
-.ad-cta {
+.gg-cta {
     background: #6f42c1;
     color: white;
     padding: 6px 12px;
@@ -210,32 +210,32 @@ textarea {
     font-size: 0.85rem;
     transition: background 0.2s;
 }
-.ad-cta:hover {
+.gg-cta:hover {
     background: #5a32a3;
     color: white;
 }
-.ad-image {
+.gg-image {
     max-width: 100%;
     margin-bottom: 10px;
     border-radius: 4px;
 }
-.ad-sponsor {
+.gg-sponsor {
     font-size: 0.75rem;
     color: #adb5bd;
     margin-top: 8px;
 }
-.ad-row {
+.gg-row {
     margin-bottom: 20px;
 }
 .main-content {
     position: relative;
 }
-.ad-sidebar {
+.gg-sidebar {
     position: sticky;
     top: 20px;
 }
 @media (max-width: 992px) {
-    .ad-sidebar {
+    .gg-sidebar {
         display: none;
     }
 }
